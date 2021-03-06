@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="背包问题, 生活,编程,阅读,音乐,电影">
-    <meta name="description" content="铭记过去，拥抱未来，心中有梦，眼里有光">
+    <meta name="keywords" content="背包问题, 生活,编程">
+    <meta name="description" content="铭记过去，拥抱未来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -136,7 +136,7 @@
         <div class="logo-name">举目浪沧平</div>
         <div class="logo-desc">
             
-            铭记过去，拥抱未来，心中有梦，眼里有光
+            铭记过去，拥抱未来
             
         </div>
     </div>
@@ -382,7 +382,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2
+                    46
                 </div>
                 
 
@@ -409,10 +409,15 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>12</p>
-</blockquote>
-<h1 id="te"><a href="#te" class="headerlink" title="te"></a>te</h1><p>tedsgfdasdj </p>
+                <p>01背包的状态转移方程：</p>
+<pre class=" language-txt"><code class="language-txt">F[i,v] = max{F[i-1,v], F[i-1,v-Ci] + Wi}
+</code></pre>
+<p>完全背包的状态转移方程：</p>
+<pre class=" language-txt"><code class="language-txt">F[i,v] = max{F[i-1,v-kCi] + kWi | 0 <= kCi <= v}
+</code></pre>
+<p>多重背包的状态转移方程：</p>
+<pre class=" language-txt"><code class="language-txt">F[i,v] = max{F[i-1,v-kCi] + kWi | 0 <= k <= Mi}
+</code></pre>
 
                 
             </div>
@@ -893,10 +898,10 @@
         notify: 'true' === 'true',
         verify: 'false' === 'true',
         visitor: 'true' === 'true',
-        avatar: 'mm',
+        avatar: 'robohash',
         pageSize: '10',
         lang: 'zh-cn',
-        placeholder: 'just go go'
+        placeholder: 'comment here...'
     });
 </script>
 
@@ -943,8 +948,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/fblog/categories/Markdown/" class="post-category">
-                                    Markdown
+                            <a href="/fblog/categories/%E9%80%9A%E7%94%A8/" class="post-category">
+                                    通用
                                 </a>
                             
                             
@@ -954,8 +959,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/fblog/tags/Markdown/">
-                        <span class="chip bg-color">Markdown</span>
+                    <a href="/fblog/tags/markdown/">
+                        <span class="chip bg-color">markdown</span>
                     </a>
                     
                 </div>
