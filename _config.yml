@@ -8,7 +8,7 @@ subtitle: '永远年轻，永远热泪盈眶'
 description: '铭记过去，拥抱未来，心中有梦，眼里有光'
 keywords: 生活,编程,阅读,音乐,电影
 author: SkyTuring
-language: zh-CH
+language: zh-CN
 zh-CN timezone: 'Asia/Shanghai'
 
 # URL
@@ -42,7 +42,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
 #highlight:
@@ -142,7 +142,8 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: matery
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -151,4 +152,30 @@ deploy:
 #  repo: 'git@github.com:SkyTuring/fblog'
   branch: gh-pages
 
+# 搜索功能
+search:
+  path: search.xml
+  field: post
+
+# 中文链接转拼音
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+
+# 字数统计功能
+postInfo:
+  date: true
+  update: true
+  wordCount: true # 设置文章字数统计为 true.
+  totalCount: true # 设置站点文章总字数统计为 true.
+  min2read: true # 阅读时长.
+  readCount: true # 阅读次数.
+
+# emoji表情支持
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+  customEmojis:
 

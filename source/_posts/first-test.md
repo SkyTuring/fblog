@@ -5,6 +5,6 @@ tags:
 ---
 
 
-```
-print(123)123
+``` python
+print(123)
 ```
