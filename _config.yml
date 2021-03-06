@@ -162,15 +162,6 @@ permalink_pinyin:
   enable: true
   separator: '-' # default: '-'
 
-# 字数统计功能
-postInfo:
-  date: true
-  update: true
-  wordCount: true # 设置文章字数统计为 true.
-  totalCount: true # 设置站点文章总字数统计为 true.
-  min2read: true # 阅读时长.
-  readCount: true # 阅读次数.
-
 # emoji表情支持
 githubEmojis:
   enable: true
