@@ -4,9 +4,10 @@ date: 2021-03-06 19:55:51
 summary: markdown的基本语法
 cover: true
 top: true
-categories: Markdown
+categories: 
+  - 通用
 tags: 
-  - Markdown
+  - markdown
 ---
 ## 基本用法
 ### 标题
@@ -39,16 +40,8 @@ Markdown针对链接和图片的处理也比较简单，可以使用下面的语
 
 ```md
 [点击跳转至百度](http://www.baidu.com)
-![图片](https://upload-images.jianshu.io/upload_images/703764-605e3cc2ecb664f6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![图片](https://url)
 ```
-
-以上标记显示效果如下：
-
-[点击跳转至百度](https://link.jianshu.com?t=http%3A%2F%2Fwww.baidu.com)
-
-![img](https:////upload-images.jianshu.io/upload_images/703764-605e3cc2ecb664f6.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
-
-图片
 
 注： 引用图片和链接的唯一区别就是在最前方添加一个感叹号。
 

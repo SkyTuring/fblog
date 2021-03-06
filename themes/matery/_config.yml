@@ -204,8 +204,8 @@ clicklove:
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
   avatar: /medias/avatar.jpg
-  career: 'Software Engineer'
-  introduction: 'If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.'
+  career: 干饭人
+  introduction: If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
@@ -326,9 +326,9 @@ valine:
   notify: true
   verify: false
   visitor: true
-  avatar: 'mm' # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
+  avatar: 'robohash' # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
   pageSize: 10
-  placeholder: 'just go go' # Comment Box placeholder
+  placeholder: 'comment here...' # Comment Box placeholder
   background: /medias/comment_bg.png
   coolpushkey: 
 
@@ -555,7 +555,7 @@ subtitle:
 
 # 手机二级菜单.
 navMenu:
-  mleft: false # 二级侧栏子菜单是否对齐左边
+  mleft: true # 二级侧栏子菜单是否对齐左边
   bgColor: " " # 二级侧栏子菜单背景颜色,留空即为全局背景色
 
 # 网页预加载.
