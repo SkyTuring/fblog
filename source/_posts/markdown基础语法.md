@@ -40,10 +40,13 @@ Markdown针对链接和图片的处理也比较简单，可以使用下面的语
 
 ```md
 [点击跳转至百度](http://www.baidu.com)
-![图片](https://url)
+![图片标题](https://img.alicdn.com/tfs/TB1WeJ9Xrj1gK0jSZFuXXcrHpXa-195-195.png)
 ```
 
 注： 引用图片和链接的唯一区别就是在最前方添加一个感叹号。
+
+[点击跳转至百度](http://www.baidu.com)
+![图片标题](https://img.alicdn.com/tfs/TB1WeJ9Xrj1gK0jSZFuXXcrHpXa-195-195.png)
 
 ### 列表
 
