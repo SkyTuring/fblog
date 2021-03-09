@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="markdown基础语法, 生活,编程">
+    <meta name="keywords" content="使用python从c代码文件中读取一个函数, 生活,编程">
     <meta name="description" content="铭记过去，拥抱未来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>markdown基础语法 | 举目浪沧平</title>
+    <title>使用python从c代码文件中读取一个函数 | 举目浪沧平</title>
     <link rel="icon" type="image/png" href="/fblog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/fblog/libs/awesome/css/all.css">
@@ -227,12 +227,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/fblog/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/fblog/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">markdown基础语法</h1>
+                    <h1 class="description center-align post-title">使用python从c代码文件中读取一个函数</h1>
                 </div>
             </div>
         </div>
@@ -348,8 +348,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/fblog/tags/markdown/">
-                                <span class="chip bg-color">markdown</span>
+                            <a href="/fblog/tags/Python/">
+                                <span class="chip bg-color">Python</span>
                             </a>
                         
                     </div>
@@ -360,8 +360,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/fblog/categories/%E9%80%9A%E7%94%A8/" class="post-category">
-                                通用
+                            <a href="/fblog/categories/programming/" class="post-category">
+                                编程
                             </a>
                         
                     </div>
@@ -373,7 +373,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-05
+                    2021-02-04
                 </div>
                 
 
@@ -382,23 +382,18 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    80
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    1 分
                 </div>
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
             </div>
         </div>
         <hr class="clearfix">
@@ -409,130 +404,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>Markdown支持6种级别的标题，对应html标签 <strong>h1 ~ h6</strong></p>
-<pre class=" language-md"><code class="language-md"># h1
-## h2
-### h3
-#### h4
-##### h5
-###### h6
-</code></pre>
-<h3 id="段落及区块引用"><a href="#段落及区块引用" class="headerlink" title="段落及区块引用"></a>段落及区块引用</h3><p>需要记住的是，Markdown其实就是一种易于编写的普通文本，只不过加入了部分渲染文本的标签而已。其最终依然会转换为html标签，因此使用Markdown分段非常简单，前后至少保留一个空行即可。</p>
-<p>而另外一个比较常见的需求就是，我们可能希望对某段文字进行强调处理。Markdown提供了一个特殊符号&gt;用于段首进行强调，被强调的文字部分将会高亮显示</p>
-<pre class=" language-md"><code class="language-md">> 这段文字将被高亮显示...
-</code></pre>
-<p>以上标记显示效果如下：</p>
-<blockquote>
-<p>这段文字将被高亮显示…</p>
-</blockquote>
-<h3 id="插入链接或图片"><a href="#插入链接或图片" class="headerlink" title="插入链接或图片"></a>插入链接或图片</h3><p>Markdown针对链接和图片的处理也比较简单，可以使用下面的语法进行标记</p>
-<pre class=" language-md"><code class="language-md">[点击跳转至百度](http://www.baidu.com)
-![图片标题](https://img.alicdn.com/tfs/TB1WeJ9Xrj1gK0jSZFuXXcrHpXa-195-195.png)
-</code></pre>
-<p>注： 引用图片和链接的唯一区别就是在最前方添加一个感叹号。</p>
-<p><a target="_blank" rel="noopener" href="http://www.baidu.com/">点击跳转至百度</a><br><img src="https://img.alicdn.com/tfs/TB1WeJ9Xrj1gK0jSZFuXXcrHpXa-195-195.png" alt="图片标题"></p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Markdown支持有序列表和无序列表两种形式：</p>
-<ul>
-<li>无序列表使用*或+或-标识</li>
-<li>有序列表使用数字加.标识，例如：1.</li>
-</ul>
-<pre class=" language-md"><code class="language-md">* 黄瓜
-* 玉米
+                <p>读取C文件中函数，可能存在多种字符集的情况，需要多次尝试</p>
+<pre class=" language-python"><code class="language-python">file_path <span class="token operator">=</span> <span class="token string">"test_file_name.c"</span>
+fun_name <span class="token operator">=</span> <span class="token string">"test_function"</span>
 
-+ 黄瓜
-+ 玉米
-
-- 黄瓜
-- 玉米
-
-1. 黄瓜
-2. 玉米
+rule <span class="token operator">=</span> r<span class="token string">'\w+\**? \**?'</span> <span class="token operator">+</span> fun_name <span class="token operator">+</span> <span class="token string">'\(.*?\).*?\n\{.*?\n\}'</span>
+charsets <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"GBK"</span><span class="token punctuation">,</span> <span class="token string">"UTF-8"</span><span class="token punctuation">,</span> <span class="token string">"BIG5"</span><span class="token punctuation">,</span> <span class="token string">"ASCII"</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> charset <span class="token keyword">in</span> charsets<span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span>file_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span>charset<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            data <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
+temp_str <span class="token operator">=</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>rule<span class="token punctuation">,</span> data<span class="token punctuation">,</span> re<span class="token punctuation">.</span>DOTALL<span class="token punctuation">)</span>
+<span class="token keyword">for</span> temp <span class="token keyword">in</span> temp_str<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span>
 </code></pre>
-<p>以上标记显示效果如下：</p>
-<ul>
-<li>黄瓜</li>
-<li>玉米</li>
-</ul>
-<ul>
-<li>黄瓜</li>
-<li>玉米</li>
-</ul>
-<ul>
-<li>黄瓜</li>
-<li>玉米</li>
-</ul>
-<ol>
-<li>黄瓜</li>
-<li>玉米</li>
-</ol>
-<h3 id="分隔线"><a href="#分隔线" class="headerlink" title="分隔线"></a>分隔线</h3><p>有时候，为了排版漂亮，可能会加入分隔线。Markdown加入分隔线非常简单，使用下面任意一种形式都可以</p>
-<pre class=" language-md"><code class="language-md">***
----
-</code></pre>
-<hr>
-<hr>
-<p>产生分隔线的语法要求比较松，符号之间添加空格也可以。</p>
-<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><p>有时候，我们希望对某一部分文字进行强调，使用*或_包裹即可。使用单一符号标记的效果是斜体，使用两个符号标记的效果是加粗</p>
-<pre class=" language-md"><code class="language-md">*这里是斜体*
-_这里是斜体_
-
-**这里是加粗**
-__这里是加粗__
-</code></pre>
-<p><em>这里是斜体</em><br> <em>这里是斜体</em></p>
-<p><strong>这里是加粗</strong><br> <strong>这里是加粗</strong></p>
-<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><h3 id="插入代码块"><a href="#插入代码块" class="headerlink" title="插入代码块"></a>插入代码块</h3><p>Markdown在IT圈子里面比较流行的一个重要原因是，它能够轻松漂亮地插入代码。</p>
-<p>方法是，使用反引号`进行包裹即可。如果是行内代码引用，使用单个反引号进行包裹</p>
-<p>这是一段<code>var x = 3</code>行内代码</p>
-<p>如果插入一整段代码，需要至少使用两个以上反引号进行包裹， 看效果：</p>
-<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> Int<span class="token punctuation">,</span> y<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> x <span class="token operator">+</span> y
-<span class="token punctuation">}</span>
-</code></pre>
-<p>注：很多人不知道怎么输入反引号。在英文模式下，找到键盘最左侧esc键下面的第一个键点击即可。</p>
-<h3 id="插入表格"><a href="#插入表格" class="headerlink" title="插入表格"></a>插入表格</h3><p>表格是Markdown语法中比较复杂的一个，其语法如下：</p>
-<pre class=" language-md"><code class="language-md">表头|条目一|条目二
-:---:|:---:|:---:
-项目|项目一|项目二
-</code></pre>
-<p>以上标记显示效果如下：</p>
-<table>
-<thead>
-<tr>
-<th align="center">表头</th>
-<th align="center">条目一</th>
-<th align="center">条目二</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">项目</td>
-<td align="center">项目一</td>
-<td align="center">项目二</td>
-</tr>
-</tbody></table>
-<p>注：三个短斜杠左右的冒号用于控制对齐方式，只放置左边冒号表示文字居左，只放置右边冒号表示文字居右，如果两边都放置冒号表示文字居中。</p>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><h3 id="特殊符号处理"><a href="#特殊符号处理" class="headerlink" title="特殊符号处理"></a>特殊符号处理</h3><p>Markdown使用反斜杠\插入语法中用到的特殊符号。在Markdown中，主要有以下几种特殊符号需要处理：</p>
-<pre class=" language-md"><code class="language-md">\   反斜线
-`   反引号
-*   星号
-_   底线
-{}  花括号
-[]  方括号
-()  括弧
-#   井号
-+   加号
--   减号
-.   英文句点
-!   惊叹号
-</code></pre>
-<p>例如，如果你需要插入反斜杠，就连续输入两个反斜杠即可：\ =&gt; \ 。</p>
-<p>注：在内容中输入以上特殊符号的时候一定要注意转义，否则将导致内容显示不全，甚至排版混乱。</p>
-<h3 id="如何给文字上色"><a href="#如何给文字上色" class="headerlink" title="如何给文字上色"></a>如何给文字上色</h3><p>Markdown的最初目标就是为纯写作而生的。因此，它并没有考虑文字颜色这一点。但是可以使用html的标签来设置颜色</p>
-<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>font</span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>#ff0000<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>设置颜色为红色<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>font</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>font</span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>#0000ff<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>设置颜色为蓝色<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>font</span><span class="token punctuation">></span></span>
-</code></pre>
-<p>效果如下</p>
-<p><font color="#ff0000">设置颜色为红色</font><br><font color="#0000ff">设置颜色为蓝色</font></p>
 
                 
             </div>
@@ -559,7 +447,7 @@ _   底线
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://skyturing.github.io/fblog/2021/03/05/markdown-ji-chu-yu-fa/">https://skyturing.github.io/fblog/2021/03/05/markdown-ji-chu-yu-fa/</a>
+                    <a href="https://skyturing.github.io/fblog/2021/02/04/python-get-cfun/">https://skyturing.github.io/fblog/2021/02/04/python-get-cfun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -597,8 +485,8 @@ _   底线
                     
                         <div class="article-tag">
                             
-                                <a href="/fblog/tags/markdown/">
-                                    <span class="chip bg-color">markdown</span>
+                                <a href="/fblog/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
                                 </a>
                             
                         </div>
@@ -1040,31 +928,31 @@ _   底线
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/fblog/2021/03/06/bei-bao-wen-ti/">
+                <a href="/fblog/2021/03/04/markdown/markdownsequence/">
                     <div class="card-image">
                         
                         
-                        <img src="/fblog/medias/featureimages/19.jpg" class="responsive-img" alt="背包问题">
+                        <img src="/fblog/medias/featureimages/2.jpg" class="responsive-img" alt="markdown时序图">
                         
-                        <span class="card-title">背包问题</span>
+                        <span class="card-title">markdown时序图</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            markdown进阶语法
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-06
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/fblog/categories/programming/" class="post-category">
-                                    编程
+                            <a href="/fblog/categories/%E9%80%9A%E7%94%A8/" class="post-category">
+                                    通用
                                 </a>
                             
                             
@@ -1074,8 +962,8 @@ _   底线
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/fblog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                        <span class="chip bg-color">动态规划</span>
+                    <a href="/fblog/tags/markdown/">
+                        <span class="chip bg-color">markdown</span>
                     </a>
                     
                 </div>
@@ -1089,13 +977,13 @@ _   底线
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/fblog/2021/03/05/docker-an-zhuang/">
+                <a href="/fblog/2021/02/01/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/fblog/medias/featureimages/12.jpg" class="responsive-img" alt="Docker安装">
+                        <img src="/fblog/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">Docker安装</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1106,27 +994,15 @@ _   底线
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/fblog/categories/%E8%BD%AF%E4%BB%B6/" class="post-category">
-                                    软件
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            SkyTuring
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/fblog/tags/docker/">
-                        <span class="chip bg-color">docker</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -1310,7 +1186,7 @@ _   底线
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">1.9k</span>&nbsp;字
+                class="white-color">4.7k</span>&nbsp;字
             
             
             

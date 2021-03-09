@@ -382,23 +382,18 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    67
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    10 分
                 </div>
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
             </div>
         </div>
         <hr class="clearfix">
@@ -409,16 +404,418 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>01背包的状态转移方程：</p>
-<pre class=" language-txt"><code class="language-txt">F[i,v] = max{F[i-1,v], F[i-1,v-Ci] + Wi}
+                <h3 id="开门见山"><a href="#开门见山" class="headerlink" title="开门见山"></a>开门见山</h3><p>背包问题是动态规划中非常典型的例题，新手较为难懂，因为背包问题的动态转移方程不是那么容易直接看出来的，但是理解后会发现实现起来变得非常机械，直接套用动态转移方程即可。看到的大多数资料都是各种奇怪的语法写伪代码，不太好理解，记忆反而不方便，下面直接给出转态转移方程得到的部分代码，可以直接记忆，后续再逐步分析推导，深入理解，加深记忆。</p>
+<h4 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h4><p>问题：给定n种物品和一背包。物品 i 的重量为w[i]，其价值为 v[i]，背包的容量为c。问应该如何选择装入背包中的物品，使得装入背包中物品的总价值最大？</p>
+<blockquote>
+<p>定义<code>dp[i][j] </code>表示 把前<code>i</code>个物品装进容器为<code>j</code>的背包可以获得的最大价值</p>
+</blockquote>
+<p>01背包问题部分代码：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> c<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> v<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 空间优化后</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> c<span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j <span class="token operator">-</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> v<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>完全背包的状态转移方程：</p>
-<pre class=" language-txt"><code class="language-txt">F[i,v] = max{F[i-1,v-kCi] + kWi | 0 <= kCi <= v}
+<h4 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h4><p>完全背包与01背包不同就是每种物品可以有无限多个。</p>
+<p>完全背包问题部分代码：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> c<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> v<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 空间优化后</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> c<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j <span class="token operator">-</span> w<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> v<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>多重背包的状态转移方程：</p>
-<pre class=" language-txt"><code class="language-txt">F[i,v] = max{F[i-1,v-kCi] + kWi | 0 <= k <= Mi}
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><h4 id="01背包-1"><a href="#01背包-1" class="headerlink" title="01背包"></a>01背包</h4><p>背包问题的状态的转移方程是不太可能直接看出来的，需要通过表格的方式逐步推导，了解了具体的计算过程，下面使用具体的计算数据为例，背包容量为10，3件物品，重量分别为3,4,5，价值分别为4,5,6</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重量</td>
+<td>价值</td>
+<td>物品</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td><font color="#0000ff">0</font></td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td><font color="#0000ff">4</font></td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td><font color="#ff0000">5</font></td>
+<td>5</td>
+<td>5</td>
+<td>9</td>
+<td>9</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>6</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>11</td>
+</tr>
+</tbody></table>
+<p>上表中第一列代表背包容量为1-10的，表中数据为对应容量下，背包可以装下物品的最大价值。为了计算方便，同样也考虑了没有物品和背包容量为0时候的值，</p>
+<p>在只有物品1的情况下，第一行在容量3以上全部为4，也即物品1的价值，因为这个时候只能拿物品1。为啥3以下为0，很容易理解，因为背包装不下，因此可以可到一个条件就是背包容量需要大于当前物品的重量，否则不用考虑。</p>
+<p>在引入物品2后，判断变得不一样，在容量为4的情况下，背包既可以装物品1，也可以装物品2，显然这个时候需要选择物品2，因为价值更大，在只考虑物品1的情况，容量为4的时候，最大价值为4，而在不选物品1，选物品2的情况下，最大价值是5，这里存在比较，比较条件为，不选物品2和选择物品2，不选的值为之前不考虑物品2时，和当前容量一样的值，也即图中蓝色的4，选的值为当前容量减去物品2的重量时背包可以装下的最大值，也即图中蓝色的零，在加上物品2的价值，发现选物品2的价值更大，于是选择物品2，这样便得到图中红色数字5，为此可以得到如下规律。</p>
+<blockquote>
+<p>第<code>i</code>个装不下时，所得价值为<code>dp[i - 1][j] </code><br>第<code>i</code>个可以装的下，所得价值为max(<code>dp[i - 1][j]</code>, <code>dp[i - 1][j - w[i]] + v[i]</code>);</p>
+</blockquote>
+<p>根据这个规律便可以得到全表，也即可以得到考虑全部物品，不同容量背包得到的物品的最大价值。</p>
+<h4 id="完全背包-1"><a href="#完全背包-1" class="headerlink" title="完全背包"></a>完全背包</h4><p>与01背包不同是，同一个物品可以无限制取，但是毕竟容量有限，一件物品不可能无限装，有最大上限，即<code>c/w[i]</code>，如此就可以将物品<code>i</code>扩展成<code>c/w[i]</code>个，然后再按照01背包的规律便可以得到如下的表格。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重量</td>
+<td>价值</td>
+<td>物品</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1-1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1-2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1-3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>2-1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>5</td>
+<td>8</td>
+<td>9</td>
+<td>9</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>2-2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>5</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>3-1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>3-2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>12</td>
+<td>13</td>
+</tr>
+</tbody></table>
+<p><del>这里分割的方式也可以使用二进制的方式进行优化，这里不做详述</del></p>
+<p>按照这样扩展可以得到最终答案，但是性能有些不足，需要做些优化，对于上表只保留每种物品最后一个物品的值，去除其他行数据，如此便可以得到下面的表格。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重量</td>
+<td>价值</td>
+<td>物品</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td><font color="#0000ff">8</font></td>
+<td>8</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><font color="#0000ff">4</font></td>
+<td>5</td>
+<td>5</td>
+<td>8</td>
+<td><font color="#ff0000">9</font></td>
+<td>10</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>12</td>
+<td>13</td>
+</tr>
+</tbody></table>
+<p>对比与01背包问题，该表格也有一定的计算规律。在只考虑第一种物品时，由于可以再取，在容量为6时与01背包有所不同，可以取两次物品1得到最大价值为8，以图中红色的9为例，当背包容量为7时，考虑是否取物品2时，需要比较的是，不考虑物品2，值为图中上一列蓝色的8，考虑物品2，图中同列蓝色的4，位置为当前背包容量减当前物品重量，值再加上物品2的价值。于是便得到如下规律</p>
+<blockquote>
+<p>第<code>i</code>个装不下时，所得价值为<code>dp[i - 1][j] </code><br>第<code>i</code>个可以装的下，所得价值为max(<code>dp[i - 1][j]</code>, <code>dp[i][j - w[i]] + v[i]</code>);<br>与01背包二者区别在于使用同一列数据做计算。</p>
+</blockquote>
+<h4 id="空间优化"><a href="#空间优化" class="headerlink" title="空间优化"></a>空间优化</h4><p>在计算的过程中，对于已经计算过数据其实后续不会再使用，最终也不会再用到，于是可以将二维数组压缩成为一维，这种方式便是滚动数组，得到优化后的状态转移方程。</p>
+<blockquote>
+<p><code>dp[j] = max(dp[j],dp[j - w[i]] + v[i])</code></p>
+</blockquote>
+<p>这时会惊奇的发现01背包和完全背包是一样的，确实是一样，但是计算方式上存在差异，对于01背包因为每次计算需要使用上一列的数值，所以在计算时需要反向计算，这样便可以保证，使用之前数值时是未更新之前的，而完全背包需要正向计算，这样使用前值便是更新后的值。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>通过上述表格逐步计算，得到状态转移方程，为了强化记忆，需要一些例题巩固，因为背包问题是一种思想，而不是一类问题，解决问题时，可能不太容易看出是背包问题，或者可以使用背包的思想，需要自己去抽象。什么对应背包，什么对应物品，需要是情况而定。</p>
+<h4 id="最后一块石头的重量-II"><a href="#最后一块石头的重量-II" class="headerlink" title="最后一块石头的重量 II"></a>最后一块石头的重量 II</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/last-stone-weight-ii/">https://leetcode-cn.com/problems/last-stone-weight-ii/</a></p>
+<p>可以抽象为将石头分为两组，对应这物品取和不取，两组总重量差值最小，也就是让需要取的那组重量最大，这样的最大重量便是一种抽象的背包。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">lastStoneWeightII</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>stones<span class="token punctuation">,</span> <span class="token keyword">int</span> stonesSize<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> stonesSize<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+</span><span class="token operator">=</span> stones<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> bagSize <span class="token operator">=</span> sum <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>dp <span class="token operator">=</span> <span class="token function">calloc</span><span class="token punctuation">(</span>bagSize <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> stonesSize<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> bagSize<span class="token punctuation">;</span> j <span class="token operator">>=</span> stones<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token operator">--</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">fmax</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j <span class="token operator">-</span> stones<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> stones<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> sum <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> dp<span class="token punctuation">[</span>bagSize<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一和零"><a href="#一和零" class="headerlink" title="一和零"></a>一和零</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/">https://leetcode-cn.com/problems/ones-and-zeroes/</a></p>
+<h4 id="零钱兑换"><a href="#零钱兑换" class="headerlink" title="零钱兑换"></a>零钱兑换</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">https://leetcode-cn.com/problems/coin-change/</a></p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">coinChange</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>coins<span class="token punctuation">,</span> <span class="token keyword">int</span> coinsSize<span class="token punctuation">,</span> <span class="token keyword">int</span> amount<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> dp<span class="token punctuation">[</span>amount <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> amount<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token punctuation">:</span> INT_MAX <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> coinsSize<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> coins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> amount<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">fmin</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j <span class="token operator">-</span> coins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> dp<span class="token punctuation">[</span>amount<span class="token punctuation">]</span> <span class="token operator">==</span> INT_MAX <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> dp<span class="token punctuation">[</span>amount<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="一和零"><a href="#一和零" class="headerlink" title="一和零"></a>一和零</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/">https://leetcode-cn.com/problems/ones-and-zeroes/</a></p>
+<p>0和1是两种不同维度的约束条件，是二维背包问题。</p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">findMaxForm</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span> strs<span class="token punctuation">,</span> <span class="token keyword">int</span> strsSize<span class="token punctuation">,</span> <span class="token keyword">int</span> m<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">int</span> <span class="token operator">*</span>count0 <span class="token operator">=</span> <span class="token function">calloc</span><span class="token punctuation">(</span>strsSize<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -440,26 +837,11 @@
     <span class="token keyword">return</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h4 id="最后一块石头的重量-II"><a href="#最后一块石头的重量-II" class="headerlink" title="最后一块石头的重量 II"></a>最后一块石头的重量 II</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/last-stone-weight-ii/">https://leetcode-cn.com/problems/last-stone-weight-ii/</a></p>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">lastStoneWeightII</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>stones<span class="token punctuation">,</span> <span class="token keyword">int</span> stonesSize<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> stonesSize<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        sum <span class="token operator">+</span><span class="token operator">=</span> stones<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">int</span> bagSize <span class="token operator">=</span> sum <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> dp<span class="token punctuation">[</span>bagSize <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token function">memset</span><span class="token punctuation">(</span>dp<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>bagSize <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> stonesSize<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> bagSize<span class="token punctuation">;</span> j <span class="token operator">>=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> stones<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">fmax</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j <span class="token operator">-</span> stones<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> stones<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> sum <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> dp<span class="token punctuation">[</span>bagSize<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>背包问题是动态规划中非常典型的例题，新手较为难懂，理解后编码会变得非常机械，</p>
+<p>不是所有问题都可以明显看出可以使用背包的思想，需要具体问题具体分析，对不同概念抽象成背包和物品，再套用动态转移方程即可。</p>
+<p>01背包和完全背包都可以进行空间优化将二维压缩成一维，二者的状态转移方程相同，不同的是计算方向。</p>
+<p>实际编码时，可以通过遍历的范围和边界优化下判断条件，<code>dp</code>数组一般从1开始计数，防止在减一时候出错。</p>
+<p>更多背包问题可以参考:    <a target="_blank" rel="noopener" href="https://github.com/tianyicui/pack/blob/master/V2.pdf">背包九讲</a></p>
 
                 
             </div>
@@ -980,7 +1362,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            01背包与完全背包
                         
                     </div>
                     <div class="publish-info">
@@ -1018,7 +1400,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/fblog/2021/03/05/markdown-ji-chu-yu-fa/">
+                <a href="/fblog/2021/03/05/markdown/markdown-ji-chu-yu-fa/">
                     <div class="card-image">
                         
                         
@@ -1239,7 +1621,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">1.9k</span>&nbsp;字
+                class="white-color">4.7k</span>&nbsp;字
             
             
             
